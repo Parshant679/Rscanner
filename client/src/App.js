@@ -274,8 +274,9 @@ function App() {
             </Container>
               <Container fluid className="todo">
                 <InputGroup className="mb-3" style={{ width: "50vw" }}>
-                  <InputGroup.Text id="basic-addon1">Enter your open API key</InputGroup.Text>
+                  <InputGroup.Text style={{ color: "white",backgroundColor: "#30373e"}} id="basic-addon1">Enter Open AI API key</InputGroup.Text>
                   <Form.Control
+                  style={{ color: "white",backgroundColor: "#212529"}}
                     placeholder="API key"
                     type="text"
                     value={apiKey}
