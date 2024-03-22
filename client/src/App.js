@@ -19,9 +19,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(false);
   const [JD, setJD] = useState("");
-  const [apiKey,setApiKey] =useState("");
-  const [error,setError] =useState(false);
-  const [errorMessage,setEM] =useState("");
+  const [apiKey, setApiKey] = useState("");
+  const [error, setError] = useState(false);
+  const [errorMessage, setEM] = useState("");
   const [title, setTitle] = useState("");
 
   const generateEmail = async () => {
@@ -52,7 +52,7 @@ function App() {
 
       setLoading(false);
     }
-    else{
+    else {
       setError(true);
       setEM("Please enter your resume")
     }
@@ -85,7 +85,7 @@ function App() {
 
       setLoading(false);
     }
-    else{
+    else {
       setError(true);
       setEM("Suggestions")
     }
@@ -124,7 +124,7 @@ function App() {
       }
       setLoading(false);
     }
-    else{
+    else {
       setError(true);
       setEM("Please enter your resume")
     }
@@ -132,8 +132,8 @@ function App() {
 
   return (
     <div className="App">
-      <div style={{fontWeight:"800",fontSize:"2.5rem",position:"fixed",top:"0",left:"5px"}}><span style={{color:"blue"}}>R</span>scanner</div>
-      {error && <Toaster message={errorMessage}/>}
+      <div style={{ fontWeight: "800", fontSize: "2.5rem", position: "fixed", top: "0", left: "5px" }}><span style={{ color: "blue" }}>R</span>scanner</div>
+      {error && <Toaster message={errorMessage} />}
       {!result ? (
         <div
           onDragOver={(e) => {
@@ -172,7 +172,6 @@ function App() {
         >
           {!fileUrl ? (
             <>
-              {" "}
               <label htmlFor="file">
                 Click to upload or drag and drop
                 <FontAwesomeIcon
@@ -199,50 +198,52 @@ function App() {
             </>
           ) : (
             <>
-              <ShowPDF
-                loading={loading}
-                fileUrl={fileUrl}
-                setFileUrl={setFileUrl}
-                setFile={setFile}
-                setResult={setResult}
-              />
+            <Container className="main" style={{display:'flex'}}>               
+             <Card className="JD">
+                <Card.Body>
+                  <Card.Title>Enter Job Description</Card.Title>
+                  <Form.Control
+                    as="textarea"
+                    className="text"
+                    value={JD}
+                    onChange={(e) => setJD(e.target.value)}
+                    placeholder="Enter JD"
+                  />
+                  <Button
+                    style={{ margin: "11px 28px 0 28px" }}
+                    variant="outline-info"
+                    onClick={findKeywords}
+                  >
+                    Find Missing Keywords
+                  </Button>
+                </Card.Body>
+              </Card>
+                <ShowPDF
+                  loading={loading}
+                  fileUrl={fileUrl}
+                  setFileUrl={setFileUrl}
+                  setFile={setFile}
+                  setResult={setResult}
+                />
+            </Container>
               <Container fluid className="todo">
-                <InputGroup className="mb-3" style={{width:"48vw"}}>
+                <InputGroup className="mb-3" style={{ width: "50vw" }}>
                   <InputGroup.Text id="basic-addon1">Enter your open API key</InputGroup.Text>
                   <Form.Control
                     placeholder="API key"
                     type="text"
                     value={apiKey}
-                    onChange={(e)=>setApiKey(e.target.value)}
+                    onChange={(e) => setApiKey(e.target.value)}
                     aria-label="apiKey"
                     aria-describedby="basic-addon1"
                   />
                 </InputGroup>
-                <Card style={{ width: "18rem" }}>
-                  <Card.Body>
-                    <Card.Title>Enter Job Description</Card.Title>
-                    <Form.Control
-                      as="textarea"
-                      style={{ height: "150px" }}
-                      value={JD}
-                      onChange={(e) => setJD(e.target.value)}
-                      placeholder="Enter JD"
-                    />
-                    <Button
-                      style={{ margin: "11px 28px 0 28px" }}
-                      variant="outline-info"
-                      onClick={findKeywords}
-                    >
-                      Find Missing Keywords
-                    </Button>
-                  </Card.Body>
-                </Card>
                 <Button
                   style={{ marginTop: "2rem" }}
                   variant="outline-info"
                   onClick={generateEmail}
                 >
-                  Write an email to recruiter
+                  Generate an email to recruiter
                 </Button>
                 <Button
                   style={{ marginTop: "2rem" }}

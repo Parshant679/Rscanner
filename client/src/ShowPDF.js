@@ -5,7 +5,7 @@ import Spinner from "react-bootstrap/Spinner";
 const ShowPDF = ({fileUrl,loading,setFileUrl,setFile,setResult}) => {
   return (
     <div className="showpdf" style={{marginTop:"30px"}}>
-      <object className="Resume" type="application/pdf" data={fileUrl}></object>
+      <embed className="Resume" src={fileUrl} type="application/pdf"/>
       {loading ? (
         <Spinner animation="grow" variant="primary" />
       ) : (

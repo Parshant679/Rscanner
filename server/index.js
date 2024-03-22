@@ -3,6 +3,7 @@ const express = require("express");
 const multer = require("multer");
 const cors = require("cors");
 const PdfParse = require("pdf-parse");
+const path = require("path");
 
 const app = express();
 app.use(express.json());
@@ -19,7 +20,12 @@ const upload = multer({
     fileSize: 10 * 1024 * 1024, 
   },
 });
+const __dirname1 = path.resolve();
+app.use(express.static(path.join(__dirname1, "/client/build")));
 
+app.get("*", (req, res) =>
+    res.sendFile(path.resolve(__dirname1, "frontend", "build", "index.html"))
+  );
 app.use(cors());
 app.post("/Scanner", upload.single("file"), async (req, res) => {
   const JD = req.body.JD;
