@@ -16,9 +16,9 @@
 }
 .JD{
   width: 30vw;
-  height: 330px;
+  height: 340px;
   background-color: aliceblue;
-  margin-top: 73px;
+  margin-top: 67px;
 }
 
 .showpdf {
@@ -36,7 +36,7 @@
   margin-bottom: 20px;
 } 
 .text{
-  height: 220px;
+  height: 190px;
 }
 
 @media screen and (max-width:420px) {
@@ -50,10 +50,9 @@
 
 .Resume {
   width: 80vw;
-  height: fit-content;
 }
 .text{
-  height: 199px;
+  height: 169px;
 }
 }
 

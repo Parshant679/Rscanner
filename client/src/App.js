@@ -130,6 +130,45 @@ function App() {
     }
   };
 
+  const modifyResume = async () => {
+    if (file) {
+      if (JD === "") {
+        setError(true);
+        setEM("Enter Job Description")
+        return;
+      }
+      if (apiKey === "") {
+        setError(true);
+        setEM("Enter your open API key")
+        return;
+      }
+      setLoading(true);
+      var data = new FormData();
+      data.append("file", file);
+      data.append("JD", JD);
+      data.append("apiKey", apiKey);
+      const res = await fetch("http://localhost:5000/modify", {
+        method: "POST",
+        body: data,
+      });
+
+      let respData = await res.json();
+      console.log(respData);
+      if (respData.error) {
+        console.log(respData.error);
+      } else {
+        setSummary(respData.summary);
+        setTitle("Modified CV")
+        setResult(true);
+      }
+      setLoading(false);
+    }
+    else {
+      setError(true);
+      setEM("Please enter your resume")
+    }
+  };
+
   return (
     <div className="App">
       <div style={{ fontWeight: "800", fontSize: "2.5rem", position: "fixed", top: "0", left: "5px" }}><span style={{ color: "blue" }}>R</span>scanner</div>
@@ -200,7 +239,7 @@ function App() {
             <>
             <Container className="main" style={{display:'flex'}}>               
              <Card className="JD">
-                <Card.Body>
+                <Card.Body style={{display:"grid"}}>
                   <Card.Title>Enter Job Description</Card.Title>
                   <Form.Control
                     as="textarea"
@@ -208,14 +247,21 @@ function App() {
                     value={JD}
                     onChange={(e) => setJD(e.target.value)}
                     placeholder="Enter JD"
-                  />
-                  <Button
-                    style={{ margin: "11px 28px 0 28px" }}
+                  /> <Button
+                    style={{ marginTop:"7px"}}
                     variant="outline-info"
                     onClick={findKeywords}
                   >
                     Find Missing Keywords
                   </Button>
+                  <Button
+                    style={{  marginTop:"7px" }}
+                    variant="outline-info"
+                    onClick={modifyResume}
+                  >
+                    Generate Modified Resume
+                  </Button>
+                 
                 </Card.Body>
               </Card>
                 <ShowPDF
