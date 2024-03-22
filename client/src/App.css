@@ -18,7 +18,7 @@
   width: 30vw;
   height: 340px;
   color: white;
-  background-color: #212529;
+  background-color: #ffffff1a;
   margin-top: 67px;
 }
 
@@ -38,6 +38,8 @@
 } 
 .text{
   height: 190px;
+ color: white;
+ background-color: #212529;
 }
 
 @media screen and (max-width:420px) {
