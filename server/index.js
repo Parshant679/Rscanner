@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
+require("dotenv").config({ path: "../server/.env" });
 const pdfRoutes = require("./Routes/pdfRoutes");
 const emailRoutes = require("./Routes/emailRoutes");
 const cvRoutes = require("./Routes/cvRoutes");
