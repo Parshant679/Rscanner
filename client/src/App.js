@@ -8,7 +8,7 @@ import ShowPDF from "./ShowPDF";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Form from "react-bootstrap/Form";
-import InputGroup from 'react-bootstrap/InputGroup';
+import InputGroup from "react-bootstrap/InputGroup";
 import Toaster from "./Toaster";
 
 function App() {
@@ -28,14 +28,14 @@ function App() {
     if (file) {
       if (apiKey === "") {
         setError(true);
-        setEM("Enter your open API key")
+        setEM("Enter your open API key");
         return;
       }
       setLoading(true);
       var data = new FormData();
       data.append("file", file);
       data.append("apiKey", apiKey);
-      const res = await fetch("http://localhost:5000/email", {
+      const res = await fetch(process.env.DOMAIN_NAME + "/api/email", {
         method: "POST",
         body: data,
       });
@@ -46,15 +46,14 @@ function App() {
         console.log(respData.error);
       } else {
         setSummary(respData.summary);
-        setTitle("Email to Recruiter")
+        setTitle("Email to Recruiter");
         setResult(true);
       }
 
       setLoading(false);
-    }
-    else {
+    } else {
       setError(true);
-      setEM("Please enter your resume")
+      setEM("Please enter your resume");
     }
   };
 
@@ -62,14 +61,14 @@ function App() {
     if (file) {
       if (apiKey === "") {
         setError(true);
-        setEM("Enter your open API key")
+        setEM("Enter your open API key");
         return;
       }
       setLoading(true);
       var data = new FormData();
       data.append("file", file);
       data.append("apiKey", apiKey);
-      const res = await fetch("http://localhost:5000/modify", {
+      const res = await fetch(process.env.DOMAIN_NAME + "/api/generateCv", {
         method: "POST",
         body: data,
       });
@@ -79,15 +78,14 @@ function App() {
         console.log(respData.error);
       } else {
         setSummary(respData.summary);
-        setTitle("Suggestions")
+        setTitle("Suggestions");
         setResult(true);
       }
 
       setLoading(false);
-    }
-    else {
+    } else {
       setError(true);
-      setEM("Suggestions")
+      setEM("Suggestions");
     }
   };
 
@@ -95,12 +93,12 @@ function App() {
     if (file) {
       if (JD === "") {
         setError(true);
-        setEM("Enter Job Description")
+        setEM("Enter Job Description");
         return;
       }
       if (apiKey === "") {
         setError(true);
-        setEM("Enter your open API key")
+        setEM("Enter your open API key");
         return;
       }
       setLoading(true);
@@ -108,7 +106,7 @@ function App() {
       data.append("file", file);
       data.append("JD", JD);
       data.append("apiKey", apiKey);
-      const res = await fetch("http://localhost:5000/Scanner", {
+      const res = await fetch(process.env.DOMAIN_NAME + "/api/Scanner", {
         method: "POST",
         body: data,
       });
@@ -119,14 +117,13 @@ function App() {
         console.log(respData.error);
       } else {
         setSummary(respData.summary);
-        setTitle("Missing Keywords")
+        setTitle("Missing Keywords");
         setResult(true);
       }
       setLoading(false);
-    }
-    else {
+    } else {
       setError(true);
-      setEM("Please enter your resume")
+      setEM("Please enter your resume");
     }
   };
 
@@ -134,12 +131,12 @@ function App() {
     if (file) {
       if (JD === "") {
         setError(true);
-        setEM("Enter Job Description")
+        setEM("Enter Job Description");
         return;
       }
       if (apiKey === "") {
         setError(true);
-        setEM("Enter your open API key")
+        setEM("Enter your open API key");
         return;
       }
       setLoading(true);
@@ -147,7 +144,7 @@ function App() {
       data.append("file", file);
       data.append("JD", JD);
       data.append("apiKey", apiKey);
-      const res = await fetch("http://localhost:5000/modify", {
+      const res = await fetch(process.env.DOMAIN_NAME + "/api/modify", {
         method: "POST",
         body: data,
       });
@@ -158,20 +155,29 @@ function App() {
         console.log(respData.error);
       } else {
         setSummary(respData.summary);
-        setTitle("Modified CV")
+        setTitle("Modified CV");
         setResult(true);
       }
       setLoading(false);
-    }
-    else {
+    } else {
       setError(true);
-      setEM("Please enter your resume")
+      setEM("Please enter your resume");
     }
   };
 
   return (
     <div className="App">
-      <div style={{ fontWeight: "800", fontSize: "2.5rem", position: "fixed", top: "0", left: "5px" }}><span style={{ color: "blue" }}>R</span>scanner</div>
+      <div
+        style={{
+          fontWeight: "800",
+          fontSize: "2.5rem",
+          position: "fixed",
+          top: "0",
+          left: "5px",
+        }}
+      >
+        <span style={{ color: "blue" }}>R</span>scanner
+      </div>
       {error && <Toaster message={errorMessage} />}
       {!result ? (
         <div
@@ -237,33 +243,33 @@ function App() {
             </>
           ) : (
             <>
-            <Container className="main" style={{display:'flex'}}>               
-             <Card className="JD">
-                <Card.Body style={{display:"grid"}}>
-                  <Card.Title>Enter Job Description</Card.Title>
-                  <Form.Control
-                    as="textarea"
-                    className="text"
-                    value={JD}
-                    onChange={(e) => setJD(e.target.value)}
-                    placeholder="Enter JD"
-                  /> <Button
-                    style={{ marginTop:"7px"}}
-                    variant="outline-info"
-                    onClick={findKeywords}
-                  >
-                    Find Missing Keywords
-                  </Button>
-                  <Button
-                    style={{  marginTop:"7px" }}
-                    variant="outline-info"
-                    onClick={modifyResume}
-                  >
-                    Generate Modified Resume
-                  </Button>
-                 
-                </Card.Body>
-              </Card>
+              <Container className="main" style={{ display: "flex" }}>
+                <Card className="JD">
+                  <Card.Body style={{ display: "grid" }}>
+                    <Card.Title>Enter Job Description</Card.Title>
+                    <Form.Control
+                      as="textarea"
+                      className="text"
+                      value={JD}
+                      onChange={(e) => setJD(e.target.value)}
+                      placeholder="Enter JD"
+                    />{" "}
+                    <Button
+                      style={{ marginTop: "7px" }}
+                      variant="outline-info"
+                      onClick={findKeywords}
+                    >
+                      Find Missing Keywords
+                    </Button>
+                    <Button
+                      style={{ marginTop: "7px" }}
+                      variant="outline-info"
+                      onClick={modifyResume}
+                    >
+                      Generate Modified Resume
+                    </Button>
+                  </Card.Body>
+                </Card>
                 <ShowPDF
                   loading={loading}
                   fileUrl={fileUrl}
@@ -271,12 +277,17 @@ function App() {
                   setFile={setFile}
                   setResult={setResult}
                 />
-            </Container>
+              </Container>
               <Container fluid className="todo">
                 <InputGroup className="mb-3" style={{ width: "50vw" }}>
-                  <InputGroup.Text style={{ color: "white",backgroundColor: "#30373e"}} id="basic-addon1">Enter Open AI API key</InputGroup.Text>
+                  <InputGroup.Text
+                    style={{ color: "white", backgroundColor: "#30373e" }}
+                    id="basic-addon1"
+                  >
+                    Enter Open AI API key
+                  </InputGroup.Text>
                   <Form.Control
-                  style={{ color: "white",backgroundColor: "#212529"}}
+                    style={{ color: "white", backgroundColor: "#212529" }}
                     placeholder="API key"
                     type="text"
                     value={apiKey}
