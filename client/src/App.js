@@ -14,7 +14,6 @@ import Toaster from "./Toaster";
 function App() {
   const [file, setFile] = useState(null);
   const [fileUrl, setFileUrl] = useState("");
-  const [fileEnter, setFileEnter] = useState(false);
   const [summary, setSummary] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(false);
@@ -183,18 +182,14 @@ function App() {
         <div
           onDragOver={(e) => {
             e.preventDefault();
-            setFileEnter(true);
           }}
           onDragLeave={(e) => {
-            setFileEnter(false);
           }}
           onDragEnd={(e) => {
             e.preventDefault();
-            setFileEnter(false);
           }}
           onDrop={(e) => {
             e.preventDefault();
-            setFileEnter(false);
             if (e.dataTransfer.items) {
               [...e.dataTransfer.items].forEach((item, i) => {
                 if (item.kind === "file") {
