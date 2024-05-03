@@ -24,6 +24,6 @@ The Fontend will be Live at Port :3000.<br>
 ## BackEnd
 Step 1 : cd server. <br>
 Step 2 : run " npm install " to install the dependencies.<br>
-Step 4 : Once the dependencies are install ,run "npm start" or " node server.js".<br>
+Step 4 : Once the dependencies are install ,run "npm start" or " node index.js".<br>
 Step 7 : Once all the above steps are complete server will start running at PORT : 8080
 
